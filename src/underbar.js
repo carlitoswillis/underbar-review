@@ -105,20 +105,50 @@
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+    const rejects = [];
 
+    for (let value of collection) {
+      if (!test(value)) {
+        rejects.push(value);
+      }
+    }
 
+    return rejects;
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
-  };
 
+    const resultArray = [];
+    iterator = typeof isSorted !== 'boolean' ? isSorted : iterator;
+    if (iterator) {
+      const tempArray = _.map(array, iterator);
+      for (let i = array.length - 1; i > -1; i--) {
+
+        var last = tempArray.pop();
+        var lastFromOriginal = array[i];
+        if (_.indexOf(tempArray, last) === -1) {
+          resultArray.unshift(lastFromOriginal);
+        }
+      }
+      return resultArray;
+    } else {
+      return Array.from(new Set(array));
+    }
+  };
 
   // Return the results of applying an iterator to each element.
   _.map = function(collection, iterator) {
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
+    const mapped = [];
+
+    _.each(collection, function(item) {
+      mapped.push(iterator(item));
+    });
+
+    return mapped;
   };
 
   /*
