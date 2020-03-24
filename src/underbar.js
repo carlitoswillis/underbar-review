@@ -88,12 +88,25 @@
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
+    // input: collection, function returning a boolean
+    // output: new collection
+    const filtered = [];
+
+    for (let value of collection) {
+      if (test(value)) {
+        filtered.push(value);
+      }
+    }
+
+    return filtered;
   };
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+
+
   };
 
   // Produce a duplicate-free version of the array.
