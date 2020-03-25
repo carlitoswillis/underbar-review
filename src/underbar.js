@@ -444,7 +444,7 @@
       return accumulator;
     }, -Infinity);
     const result = [];
-    for (let i = 0;  i < maxLength; i++) {
+    for (let i = 0; i < maxLength; i++) {
       var tuple = [];
       for (let j = 0; j < arguments.length; j++) {
         var currentList = arguments[j];
