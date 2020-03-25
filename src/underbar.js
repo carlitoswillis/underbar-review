@@ -348,7 +348,7 @@
       var result = func.apply(this, arguments);
       storedValues[args] = result;
       return result;
-    }
+    };
 
 
   };
@@ -381,9 +381,9 @@
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
     var randomizer = function() {
-      var random = Math.random() * (workArray.length - 1)
+      var random = Math.random() * (workArray.length - 1);
       result.push(workArray.splice(random, 1)[0]);
-    }
+    };
     var workArray = array.slice();
     var result = [];
     while (workArray.length > 0) {
@@ -407,7 +407,7 @@
     var result = _.map(collection, function(item) {
       functionOrKey = typeof functionOrKey === 'function' ? functionOrKey : item[functionOrKey];
       return functionOrKey.apply(item, args);
-    })
+    });
 
     return result;
   };
@@ -417,17 +417,18 @@
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
-    if (typeof iterator === 'string') {
-      var valuesAtProp = _.map(collection, function (item){
-        return [item, item[iterator]];
-      })
-      valuesAtProp.sort((x, y) => x[1] > y[1]);
-      _.map(valuesAtProp, function(item) {
-        return;
-      })
-    }
-    // Array.prototype.sort() function
 
+    // if (typeof iterator === 'string') {
+    //   var valuesAtProp = _.map(collection, function (item) {
+    //     return [item, item[iterator]];
+    //   });
+    //   valuesAtProp.sort((x, y) => x[1] > y[1]);
+    //   var result = _.map(valuesAtProp, function(item) {
+    //     return item[0];
+    //   });
+    // }
+
+    // return result;
   };
 
   // Zip together two or more arrays with elements of the same index
@@ -436,6 +437,12 @@
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
+    const result = [];
+    for (let i = 0; i < arguments.length; i++) {
+      var maxLength = _.reduce(arguments, function () {
+
+      }, -Infinity);
+    }
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
