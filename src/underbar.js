@@ -417,6 +417,17 @@
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
+    if (typeof iterator === 'string') {
+      var valuesAtProp = _.map(collection, function (item){
+        return [item, item[iterator]];
+      })
+      valuesAtProp.sort((x, y) => x[1] > y[1]);
+      _.map(valuesAtProp, function(item) {
+        return;
+      })
+    }
+    // Array.prototype.sort() function
+
   };
 
   // Zip together two or more arrays with elements of the same index
