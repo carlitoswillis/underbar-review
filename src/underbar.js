@@ -437,12 +437,21 @@
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
+    var maxLength = _.reduce(arguments, function (accumulator, item) {
+      if (item.length > accumulator) {
+        accumulator = item.length;
+      }
+      return accumulator;
+    }, -Infinity);
     const result = [];
     for (let i = 0; i < arguments.length; i++) {
-      var maxLength = _.reduce(arguments, function () {
-
-      }, -Infinity);
+      var tuple = [];
+      for (let j = 0; j < maxLength; j++) {
+        tuple.push(arguments[i][j]);
+      }
+      result.push(tuple);
     }
+    return result;
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
