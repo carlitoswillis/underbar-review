@@ -243,22 +243,16 @@
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here
     iterator = iterator || _.identity;
-
     if (collection.length === 0) {
       return false;
     }
-
-
     return _.reduce(collection, function (accumulator, item) {
       if (iterator(item)) {
         return true;
       }
       return accumulator || false;
     }, false);
-
-
   };
-
 
   /**
    * OBJECTS
@@ -279,11 +273,27 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
+    for (var i = 1; i < arguments.length; i++) {
+      for (const key in arguments[i]) {
+        obj[key] = arguments[i][key];
+      }
+    }
+
+    return obj;
   };
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    for (var i = 1; i < arguments.length; i++) {
+      for (const key in arguments[i]) {
+        if (obj[key] === undefined) {
+          obj[key] = arguments[i][key];
+        }
+      }
+    }
+
+    return obj;
   };
 
 
@@ -327,6 +337,20 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+
+    var storedValues = {};
+
+    return function () {
+      var args = JSON.stringify(arguments);
+      if (storedValues[args] !== undefined) {
+        return storedValues[args];
+      }
+      var result = func.apply(this, arguments);
+      storedValues[args] = result;
+      return result;
+    }
+
+
   };
 
   // Delays a function for the given number of milliseconds, and then calls
@@ -336,6 +360,7 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+
   };
 
 
